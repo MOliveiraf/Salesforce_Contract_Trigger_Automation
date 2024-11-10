@@ -1,0 +1,26 @@
+<apex:page standardController="Contrato__c" extensions="ContractController">
+    <h1>Novo Contrato</h1>
+    <apex:form >
+        <apex:pageMessages />
+
+        <apex:outputLabel value="Cliente" for="cliente" />
+        <apex:inputField id="cliente" value="{!Contrato__c.Cliente__c}" />
+
+        <apex:outputLabel value="Detalhes" for="detalhes" />
+        <apex:inputField id="detalhes" value="{!Contrato__c.Detalhes__c}" />
+
+        <apex:outputLabel value="Produto" for="produto" />
+        <apex:inputField id="produto" value="{!Contrato__c.Produto__c}" />
+
+        <apex:outputLabel value="Valor" for="valor" />
+        <apex:inputField id="valor" value="{!Contrato__c.Valor__c}" />
+
+        <apex:outputLabel value="Status" for="status" />
+        <apex:inputField id="status" value="{!Contrato__c.Status__c}" />
+
+        <apex:outputLabel value="Data de Expiração" for="dataExpiracao" />
+        <apex:inputField id="dataExpiracao" value="{!Contrato__c.Data_de_Expiracao__c}" />
+
+        <apex:commandButton value="Salvar" action="{!save}" />
+    </apex:form>
+</apex:page>

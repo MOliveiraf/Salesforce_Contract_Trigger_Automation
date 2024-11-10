@@ -1,0 +1,167 @@
+<!-- 
+Página Visualforce para geração de PDF de contratos 
+-->
+<apex:page controller="AccountPDFController"
+           renderAs="PDF"
+           applyBodyTag="false"
+           applyHtmlTag="false"
+           showHeader="false">
+    
+    <head>
+        <!-- Definição de estilos CSS para o PDF -->
+        <style type="text/css">
+            @page {
+                margin: 110px 0px 30px;
+                
+                @top-center {
+                    content: element(header);
+                }
+                @bottom-center {
+                    content: element(footer);
+                }
+                
+                background-image: url({!$Resource.marcaD});
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: 0 90%;
+            }
+            
+            .header {
+                display: block;
+                text-align: center;
+                font-size: 18px;
+                position: running(header);
+                color: purple;
+            }
+            
+            .footer {
+                display: block;
+                text-align: center;
+                font-size: 18px;
+                position: running(footer);
+            }
+            
+            .contaPagina:before {
+                content: counter(page);
+            }
+            
+            .contaPaginas:before {
+                content: counter(pages);
+            }
+        </style>
+    </head>
+    
+    <body>            
+        <div class="footer">
+            Página <span class="contaPagina"></span> de <span class="contaPaginas"></span>
+        </div>
+        
+        <div class="header">
+            <table>
+                <tr>
+                    <td>
+                        <apex:image value="{!$Resource.imagemLogo}" width="150px" />
+                    </td>
+                    <td style="color: white; background-color: #053868">
+                        <p>{!dados.nomeEscola}</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        
+        <!-- Pagina 1 - Dados do Contrato -->
+        <div>         
+            <apex:image value="{!$Resource.logoArquivo}" width="100%" />
+            
+            <div style="color:#053868; font-size:20px; font-weight:bold; border-bottom-width:medium; border-bottom-style:solid; border-bottom-color:#053868; margin-bottom:20px;">
+                <b>Contrato de Venda</b>
+            </div>
+            
+            <div style="font-size:20px; font-weight:400;">
+                <b style="color:#053868; font-weight:bold;">Cliente:</b> {!dados.contrato.nome}
+            </div>
+            
+            <div style="background-color:#E6ECF0; margin-top:5px; padding:0 10px;">
+                <table width="100%">
+                    <tr>
+                        <td width="50%" style="padding:10px;"><b>Nome do Contrato:</b> {!dados.contrato.nome}</td>
+                        <td width="50%" style="padding:10px;"><b>Status:</b> {!dados.contrato.status}</td>
+                    </tr>
+                    <tr>
+                        <td width="50%" style="padding:10px;"><b>Valor:</b> {!dados.contrato.valor}</td>
+                        <td width="50%" style="padding:10px;"><b>Data de Expiração:</b> {!dados.contrato.dataExpiracao}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Pagina 2 - Condições Gerais -->
+        <div>
+            <p style="page-break-before: always"></p>
+            <div style="text-align: center"><b>Condições Gerais</b></div>
+            <div>
+                <table width="100%">
+                    <tr>
+                        <td width="50%" style="padding-right: 5px">
+                            <p align="justify">
+                                <b>1. Objeto</b> Where does it come from?...
+                            </p>
+                        </td>
+                        <td width="50%">
+                            <p align="justify">
+                                <b>4. Objeto</b> The standard chunk of Lorem Ipsum...
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Pagina 3 - Declarações e Assinaturas -->
+        <div>
+            <p style="page-break-before: always"></p>
+            <div style="background-color: #E6ECFO; padding: 10px">
+                <p>
+                    Declaro que desejo comprar segundo a espécie, qualidade e quantidade...
+                </p>
+            </div>
+            
+            <div style="background-color: #E6ECF0; padding:10px; margin-top:40px;">
+                <div style="color:#053868; font-size:16px; font-weight:bold; text-align:center;">
+                    <b>ATENÇÃO</b>
+                </div>
+                <div style="font-size:16px;">
+                    <p>
+                        Os signatários do presente Contrato declaram-se cientes das condições de venda...
+                    </p>
+                </div>
+                <div style="font-size:16px; text-align:right;">
+                    <p>Escola Salesforce</p>
+                </div>
+                <div>
+                    <table width="100%">
+                        <tr>
+                            <td width="50%" style="text-align:center;">________________________________</td>
+                            <td width="50%" style="text-align:center;">________________________________</td>
+                        </tr>
+                        <tr>
+                            <td width="50%" style="text-align:center;">{!dados.contrato.nome}</td>
+                            <td width="50%" style="text-align:center;">{!dados.nomeEscola}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div style="color:#053868; font-size:16px; font-weight:bold; margin-top:50px;">
+                    <b>Testemunhas:</b>
+                </div>
+                <div style="padding-left:30px; margin:30px 0;">
+                    <table width="100%">
+                        <tr>
+                            <td width="50%" style="padding:10px 0;">1. _____________________________</td>
+                            <td width="50%" style="padding:10px 0;">2. _____________________________</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </body>            
+</apex:page>
